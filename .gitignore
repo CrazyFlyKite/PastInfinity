@@ -1,0 +1,18 @@
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# Local enviroment
+.env
+
+# ZIP archives
+*.zip
+
+# Virtual environment
+.venv/
+
+# PyCharm IDE files
+.idea/
+
+# MacOS be like
+.DS_Store
