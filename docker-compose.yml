@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  pastinfinity:
+    build: .
+    container_name: PastInfinity
+    restart: always
+    volumes:
+      - .:/app

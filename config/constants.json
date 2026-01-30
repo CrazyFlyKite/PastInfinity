@@ -1,0 +1,39 @@
+{
+	"database": "pastinfinity",
+	"developer_id": 873920068571000833,
+	"leaderboard_count": 15,
+	"trusted_roles": [
+		"Dictator",
+		"Co-Owner",
+		"Admin",
+		"Mod"
+	],
+	"supported_characters": "1234567890.+-*/%() ",
+	"replacement_symbols": {
+		"π": 3.14159,
+		"ϕ": 1.61803
+	},
+	"leaderboard_order_choices": [
+		{
+			"name": "Correct Count",
+			"value": "correct_count"
+		},
+		{
+			"name": "Incorrect Count",
+			"value": "incorrect_count"
+		},
+		{
+			"name": "Max Count",
+			"value": "max_count"
+		},
+		{
+			"name": "Accuracy",
+			"value": "accuracy"
+		}
+	],
+	"emojis": {
+		"correct": "\u2705",
+		"incorrect": "\u274C",
+		"fire": "\u1F525"
+	}
+}
