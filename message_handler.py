@@ -39,7 +39,10 @@ class MessageHandler:
 			return Response()
 
 		if not execute_get('SELECT * FROM users WHERE user_id = %s', (author_id,)):
-			...
+			execute_write(
+				'INSERT INTO users (user_id, correct_count, incorrect_count, max_count) VALUES (%s, %s, %s, %s)',
+				(author_id, 0, 0, 0)
+			)
 
 		try:
 			result: int = round(eval(user_input))

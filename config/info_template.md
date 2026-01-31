@@ -9,15 +9,15 @@ I'm keeping track of a sequence of numbers!
 - You can use some math constants: **π** ≈ **3.14159**, **ϕ** ≈ **1.61803**
 
 ## Public Commands
-`/info` - Show information about the bot
-`/next` - Show the next number in the sequence
-`/leaderboard` - Display Top {leaderboard_count} users by the correct count, incorrect count, ect…
-`/stats` - Show user statistics
+- `/info` - Show information about the bot
+- `/next` - Show the next number in the sequence
+- `/leaderboard` - Display Top {leaderboard_count} users by the correct count, incorrect count, ect…
+- `/stats` - Show user statistics
 
 ## Restricted Commands
-`/switch channel` - Change bot's operating channel to another
-`/blacklist add` - Add user to the blacklist
-`/blacklist remove` - Remove user from the blacklist
+- `/switch channel` - Change bot's operating channel to another
+- `/blacklist add` - Add user to the blacklist
+- `/blacklist remove` - Remove user from the blacklist
 
 ## Developer
 [My Discord](<https://discord.com/users/{developer_id}>)

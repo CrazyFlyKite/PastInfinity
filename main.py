@@ -14,6 +14,8 @@ from utilities import *
 # Setup logging
 if not IS_NAS:
 	setup_logging(level=logging.DEBUG, logging_format='[%(levelname)s]: %(message)s')
+else:
+	logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s]: %(message)s')
 
 # Setup Bot
 intents: Intents = Intents.default()
@@ -173,7 +175,7 @@ async def on_message(message: Message) -> None:
 	if message.author != bot.user and message.channel.id == channel_id:
 		logging.debug(f'@{message.author} said \"{message.content}\" in {message.channel.name}.')
 
-		if not message.content:
+		if not (message.content or message.attachments or message.embeds or message.stickers):
 			logging.critical('Message is empty.')
 			return
 

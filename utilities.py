@@ -49,5 +49,5 @@ REPEAT_EMOJI: Final[str] = config.get('emojis').get('repeat')
 # Information
 DEVELOPER_IP: Final[int] = config.get('developer_id')
 
-with open('config/info_template.txt', 'r', encoding='utf-8') as file:
+with open('config/info_template.md', 'r', encoding='utf-8') as file:
 	INFORMATION: Final[str] = file.read().format(leaderboard_count=LEADERBOARD_COUNT, developer_id=DEVELOPER_IP)
