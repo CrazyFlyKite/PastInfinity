@@ -10,7 +10,7 @@
 
 ## Introduction
 
-**PastInfinity** is a Discord bot for keeping track of a sequence of numbers in a specific.
+**PastInfinity** is a Discord bot for keeping track of a sequence of numbers in a specific channel.
 
 ## File Structure
 
@@ -24,7 +24,7 @@
 
 ## Host
 
-`docker-compose.yml` and `Dockerfile` are there, because the bot hosted on a Synology NAS, so `utilities.py` has some
+`docker-compose.yml` and `Dockerfile` are there, because the bot hosted on my Synology NAS. `utilities.py` also has
 platform detection functionality.
 
 ## .env

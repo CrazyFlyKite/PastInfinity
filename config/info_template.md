@@ -1,4 +1,4 @@
-I'm keeping track of a sequence of numbers!
+I'm keeping track of a sequence of numbers in a specific channel.
 
 ## How To Use
 - Write a number in sequence to **continue the count**
@@ -19,5 +19,6 @@ I'm keeping track of a sequence of numbers!
 - `/blacklist add` - Add user to the blacklist
 - `/blacklist remove` - Remove user from the blacklist
 
-## Developer
-[My Discord](<https://discord.com/users/{developer_id}>)
+## More
+- **[Developer](<https://discord.com/users/{developer_id}>)**
+- **[GitHub Repository](<https://github.com/CrazyFlyKite/PastInfinity>)**
