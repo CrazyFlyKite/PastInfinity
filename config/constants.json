@@ -1,39 +1,28 @@
 {
-	"database": "pastinfinity",
+	"logging_format": "[%(levelname)s]: %(message)s",
 	"developer_id": 873920068571000833,
-	"leaderboard_count": 15,
-	"trusted_roles": [
-		"Dictator",
-		"Co-Owner",
-		"Admin",
-		"Mod"
+	"database": "pastinfinity",
+	"leaderboard_count": 12,
+	"moderators": [
+		1254829974024884276,
+		1268995729817604196,
+		1254830374878449779
 	],
 	"supported_characters": "1234567890.+-*/%() ",
 	"replacement_symbols": {
 		"π": 3.14159,
-		"ϕ": 1.61803
+		"ϕ": 1.61803,
+		"e": 2.71828
 	},
-	"leaderboard_order_choices": [
-		{
-			"name": "Correct Count",
-			"value": "correct_count"
-		},
-		{
-			"name": "Incorrect Count",
-			"value": "incorrect_count"
-		},
-		{
-			"name": "Max Count",
-			"value": "max_count"
-		},
-		{
-			"name": "Accuracy",
-			"value": "accuracy"
-		}
-	],
+	"leaderboard_order_choices": {
+		"correct_count": "Correct Count",
+		"incorrect_count": "Incorrect Count",
+		"max_count": "Max Count",
+		"accuracy": "Accuracy"
+	},
 	"emojis": {
 		"correct": "\u2705",
 		"incorrect": "\u274C",
-		"fire": "\u1F525"
+		"fire": "\ud83d\udd25"
 	}
 }

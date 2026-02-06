@@ -6,7 +6,7 @@ I'm keeping track of a sequence of numbers in a specific channel.
 - You can use **Python** mathematical symbols: `+`, `-`, `*`, `/`, `//`, `**` (power), `()`
 - The result is always **rounded** to the nearest whole number
 - You can't count immediately after yourself, you need to wait for someone else to continue before you can count again
-- You can use some math constants: **π** ≈ **3.14159**, **ϕ** ≈ **1.61803**
+- You can use some math constants: **π** ≈ **3.14159**, **ϕ** ≈ **1.61803**, **e** ≈ **2.71828**
 
 ## Public Commands
 - `/info` - Show information about the bot

@@ -5,7 +5,7 @@ import mysql.connector
 from utilities import *
 
 
-def execute_get(code: str, parameters: Tuple = None) -> Any:
+async def execute_get(code: str, parameters: Tuple = None) -> Any:
 	connection = mysql.connector.connect(host=HOST_IP, user=MYSQL_USER, passwd=MYSQL_PASSWORD, database=DATABASE)
 	cursor = connection.cursor()
 
@@ -17,7 +17,7 @@ def execute_get(code: str, parameters: Tuple = None) -> Any:
 		connection.close()
 
 
-def execute_write(code: str, parameters: Tuple = None) -> None:
+async def execute_write(code: str, parameters: Tuple = None) -> None:
 	connection = mysql.connector.connect(host=HOST_IP, user=MYSQL_USER, passwd=MYSQL_PASSWORD, database=DATABASE)
 	cursor = connection.cursor()
 

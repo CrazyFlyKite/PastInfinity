@@ -3,9 +3,9 @@ from typing import Optional
 from discord import Embed, Colour
 
 
-def embed(description: str, colour: Colour = Colour.blue(), title: Optional[str] = None,
+def embed(description: str, color: Colour = Colour.blue(), title: Optional[str] = None,
           thumbnail: Optional[str] = None) -> Embed:
-	embed_object: Embed = Embed(description=description, colour=colour)
+	embed_object: Embed = Embed(description=description, colour=color)
 
 	if title:
 		embed_object.title = title
