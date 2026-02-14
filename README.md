@@ -2,7 +2,7 @@
 
 ### Requirements
 
-![Python Version](https://img.shields.io/badge/Python-3.14%2B-blue)
+![Python Version](https://img.shields.io/badge/Python-3.12%2B-blue)
 
 ![discord](https://img.shields.io/badge/discord-2.3.2%2B-blue)
 ![mysql-connector-python](https://img.shields.io/badge/mysql-9.2.0%2B-red)
@@ -11,6 +11,9 @@
 ## Introduction
 
 **PastInfinity** is a Discord bot for keeping track of a sequence of numbers in a specific channel.
+
+- Detailed command documentation can be found in [`config/info_template.md`](config/info_template.md)
+- Bot configurations can be found in [`config/constants.json`](config/constants.json)
 
 ## File Structure
 
@@ -24,8 +27,8 @@
 
 ## Host
 
-`docker-compose.yml` and `Dockerfile` are there, because the bot hosted on my Synology NAS. `utilities.py` also has
-platform detection functionality.
+`docker-compose.yml` and `Dockerfile` are necessary, because the bot is hosted on my Synology NAS. `utilities.py` also
+has platform detection functionality.
 
 ## .env
 
@@ -38,12 +41,9 @@ MYSQL_PASSWORD=???
 SYNOLOGY_IP=???.???.?.??
 ```
 
-## Commands
-
-Detailed command documentation can be found in [`config/info_template.md`](config/info_template.md)
-
 ## Contact
 
-- [Discord](https://discord.com/users/873920068571000833)
-- [GitHub](https://github.com/CrazyFlyKite)
-- [Email](mailto:karpenkoartem2846@gmail.com)
+- **[My Website](https://crazyflykite.com)**
+- **[Discord](https://discord.com/users/873920068571000833)**
+- **[GitHub](https://github.com/CrazyFlyKite)**
+- **[Email](mailto:karpenkoartem2846@gmail.com)**

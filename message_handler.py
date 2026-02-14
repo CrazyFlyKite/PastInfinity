@@ -56,6 +56,10 @@ class MessageHandler:
 			await self.set_current(await self.get_current() + 1)
 			await execute_write('UPDATE users SET correct_count = correct_count + 1 WHERE user_id = %s', (author_id,))
 			await self.set_last_counted(author_id)
+
+			if (new_count := await self.get_current()) > (await execute_get('SELECT max_count FROM users WHERE user_id = %s', (author_id,)))[0][0]:
+				await execute_write('UPDATE users SET max_count = %s WHERE user_id = %s', (new_count, author_id))
+
 			return Response(None, True, True)
 		else:
 			await self.lose(author_id)
