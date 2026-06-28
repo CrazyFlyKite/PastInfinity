@@ -1,12 +1,19 @@
-from typing import Tuple, Any
-
-import mysql.connector
+from mysql.connector.pooling import MySQLConnectionPool
 
 from utilities import *
 
+pool: MySQLConnectionPool = MySQLConnectionPool(
+	pool_name='pastinfinity',
+	pool_size=10,
+	host=HOST_IP,
+	user=MYSQL_USER,
+	password=MYSQL_PASSWORD,
+	database=DATABASE
+)
 
-async def execute_get(code: str, parameters: Tuple = None) -> Any:
-	connection = mysql.connector.connect(host=HOST_IP, user=MYSQL_USER, passwd=MYSQL_PASSWORD, database=DATABASE)
+
+async def execute_get(code: str, parameters: Optional[Any] = None):
+	connection = pool.get_connection()
 	cursor = connection.cursor()
 
 	try:
@@ -17,8 +24,8 @@ async def execute_get(code: str, parameters: Tuple = None) -> Any:
 		connection.close()
 
 
-async def execute_write(code: str, parameters: Tuple = None) -> None:
-	connection = mysql.connector.connect(host=HOST_IP, user=MYSQL_USER, passwd=MYSQL_PASSWORD, database=DATABASE)
+async def execute_write(code: str, parameters: Optional[Any] = None):
+	connection = pool.get_connection()
 	cursor = connection.cursor()
 
 	try:

@@ -7,19 +7,23 @@ from utilities import *
 
 
 class MessageHandler:
-	async def get_current(self) -> int:
+	@staticmethod
+	async def get_current() -> int:
 		return (await execute_get('SELECT current_count FROM game_state'))[0][0]
 
-	async def set_current(self, value: int) -> None:
+	@staticmethod
+	async def set_current(value: int) -> None:
 		await execute_write('UPDATE game_state SET current_count = %s', (value,))
 
 	async def get_next(self) -> int:
 		return (await self.get_current()) + 1
 
-	async def get_last_counted(self) -> Optional[int]:
+	@staticmethod
+	async def get_last_counted() -> Optional[int]:
 		return (await execute_get('SELECT last_user_id FROM game_state'))[0][0]
 
-	async def set_last_counted(self, value: Optional[int]) -> None:
+	@staticmethod
+	async def set_last_counted(value: Optional[int]) -> None:
 		await execute_write('UPDATE game_state SET last_user_id = %s', (value,))
 
 	async def get_response(self, message: Message) -> Response:
@@ -33,24 +37,18 @@ class MessageHandler:
 			return Response()
 
 		if not await execute_get('SELECT * FROM users WHERE user_id = %s', (author_id,)):
-			await execute_write(
-				'INSERT INTO users (user_id, correct_count, incorrect_count, max_count) VALUES (%s, %s, %s, %s)',
-				(author_id, 0, 0, 0)
-			)
+			await execute_write('INSERT INTO users (user_id, correct_count, incorrect_count, max_count) VALUES (%s, %s, %s, %s)', (author_id, 0, 0, 0))
 
 		try:
 			result: int = round(eval(user_input))
-		except (SyntaxError, ValueError, TypeError):
+		except SyntaxError, ValueError, TypeError:
 			return Response()
 		except ZeroDivisionError:
-			return Response('You can\'t divide by **0**!', zero_division=True)
+			return Response('You cannot divide by **0**!', zero_division=True)
 
 		if await self.get_last_counted() == author_id:
 			await self.lose(author_id)
-			return Response(
-				f'**Incorrect**, {message.author.mention}! You can\'t count twice in a row! The next number is **1**!',
-				is_number=True, is_valid_number=False
-			)
+			return Response(f'**Incorrect**, {message.author.mention}! You can\'t count twice in a row! The next number is **1**!', is_number=True, is_valid_number=False)
 
 		if result == await self.get_next():
 			await self.set_current(await self.get_current() + 1)
@@ -70,11 +68,9 @@ class MessageHandler:
 		await self.set_last_counted(0)
 		await execute_write('UPDATE users SET incorrect_count = incorrect_count + 1 WHERE user_id = %s', (author_id,))
 
-	async def get_leaderboard(self, order: str) -> str:
-		users = await execute_get(
-			f'SELECT user_id, {order} FROM users WHERE is_blacklisted = FALSE ORDER BY {order} DESC LIMIT %s',
-			(LEADERBOARD_COUNT,)
-		)
+	@staticmethod
+	async def get_leaderboard(order: str) -> str:
+		users = await execute_get(f'SELECT user_id, {order} FROM users WHERE is_blacklisted = FALSE ORDER BY {order} DESC LIMIT %s', (LEADERBOARD_COUNT,))
 
 		if not users:
 			return 'Not enough data :('
@@ -99,11 +95,9 @@ class MessageHandler:
 
 		return string_io.getvalue()
 
-	async def get_user_stats(self, user_id: int) -> str:
-		response = await execute_get(
-			'SELECT correct_count, incorrect_count, max_count, accuracy FROM users WHERE user_id = %s',
-			(user_id,)
-		)
+	@staticmethod
+	async def get_user_stats(user_id: int) -> str:
+		response = await execute_get('SELECT correct_count, incorrect_count, max_count, accuracy FROM users WHERE user_id = %s', (user_id,))
 
 		if not response:
 			return 'No data on the user :('

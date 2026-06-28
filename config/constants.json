@@ -3,11 +3,6 @@
 	"developer_id": 873920068571000833,
 	"database": "pastinfinity",
 	"leaderboard_count": 12,
-	"moderators": [
-		1254829974024884276,
-		1268995729817604196,
-		1254830374878449779
-	],
 	"supported_characters": "1234567890.+-*/%() ",
 	"replacement_symbols": {
 		"π": 3.14159,
