@@ -1,12 +1,11 @@
 import logging
 
 from discord import Intents, Message, Interaction, User, CustomActivity, Status, Colour, Forbidden
-from discord.app_commands import checks, choices, command, guild_only, Group, AppCommandError, MissingRole, \
-	MissingAnyRole, NoPrivateMessage
+from discord.app_commands import choices, command, guild_only, Group, AppCommandError, MissingRole, MissingAnyRole, NoPrivateMessage, checks
 from discord.ext.commands import Bot
 
 from database import execute_get, execute_write
-from decorators import log_command, limit_command, restrict_command
+from decorators import log_command, limit_command
 from embeds import embed, success_embed, error_embed
 from message_handler import message_handler
 from setup_logging import setup_logging
@@ -22,14 +21,13 @@ else:
 intents: Intents = Intents.default()
 intents.message_content = True  # NOQA
 bot: Bot = Bot(command_prefix='/', intents=intents, activity=CustomActivity(name='Counting 💯'), status=Status.do_not_disturb)
-bot.remove_command('help')
 
 
 # Startup
 @bot.event
 async def on_ready() -> None:
 	logging.info(f'@{bot.user.name} is now running!')
-	logging.info(f'Commands synced: {', '.join(cmd.name for cmd in await bot.tree.sync())}')
+	logging.info(f'Commands synced: {', '.join(command.name for command in await bot.tree.sync())}')
 
 
 @bot.tree.error
@@ -37,7 +35,7 @@ async def on_app_command_error(interaction: Interaction, error: AppCommandError)
 	if isinstance(error, (MissingRole, MissingAnyRole)):
 		await interaction.response.send_message(embed=error_embed('You don\'t have the required role to use this command!'), ephemeral=True)
 	elif isinstance(error, NoPrivateMessage):
-		await interaction.response.send_message(embed=error_embed('You can\'t use this command in private messages!'), ephemeral=True)
+		await interaction.response.send_message(embed=error_embed('You can\'t use this command in Direct Messages!'), ephemeral=True)
 	else:
 		logging.critical(f'Command Error: {error}')
 
@@ -53,7 +51,7 @@ async def info(interaction: Interaction) -> None:
 @guild_only()
 @limit_command
 @log_command
-async def next(interaction: Interaction) -> None:
+async def next_number(interaction: Interaction) -> None:
 	message: str = f'Next number: **{await message_handler.get_next()}**'
 
 	if await message_handler.get_last_counted():
@@ -98,7 +96,7 @@ async def stats(interaction: Interaction, user: Optional[User] = None) -> None:
 class SwitchGroup(Group, name='switch'):
 	@command(name='channel', description='Change bot\'s operating channel to another')
 	@guild_only()
-	@restrict_command
+	@checks.has_permissions(administrator=True)
 	@log_command
 	async def channel(self, interaction: Interaction) -> None:
 		old_channel: int = (await execute_get('SELECT channel_id FROM game_state'))[0][0]
@@ -115,7 +113,7 @@ class SwitchGroup(Group, name='switch'):
 class BlacklistGroup(Group, name='blacklist'):
 	@command(name='add', description='Add user to the blacklist')
 	@guild_only()
-	@restrict_command
+	@checks.has_permissions(moderate_members=True)
 	@limit_command
 	@log_command
 	async def add(self, interaction: Interaction, user: User) -> None:
@@ -138,7 +136,7 @@ class BlacklistGroup(Group, name='blacklist'):
 
 	@command(name='remove', description='Remove user from the blacklist')
 	@guild_only()
-	@restrict_command
+	@checks.has_permissions(moderate_members=True)
 	@limit_command
 	@log_command
 	async def remove(self, interaction: Interaction, user: User) -> None:
